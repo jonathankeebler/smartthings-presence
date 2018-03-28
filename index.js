@@ -21,21 +21,28 @@ setInterval(()=>{
 
 const notify_ide = (ip, alive)=>{
 
-	console.log(`\nNotifying IDE that ${ip} is ${alive ? "online": "offline"}`);
-	request
-		.get(`${config.smartthings.ide}/api/smartapps/installations/${config.smartthings.app_id}/statechanged/${alive ? "online": "offline"}`)
-		.query({
-			access_token: config.smartthings.access_token,
-			ipadd: ip
-		})
-		.end((err, res)=>{
+	if(alive || !config.notify_online_only)
+	{
+		console.log(`\nNotifying IDE that ${ip} is ${alive ? "online": "offline"}`);
+		request
+			.get(`${config.smartthings.ide}/api/smartapps/installations/${config.smartthings.app_id}/statechanged/${alive ? "online": "offline"}`)
+			.query({
+				access_token: config.smartthings.access_token,
+				ipadd: ip
+			})
+			.end((err, res)=>{
 
-			if(res && res.status == 200)
-			{
-				status[ip].online = alive;
-			}
-		});
-
+				if(res && res.status == 200)
+				{
+					status[ip].online = alive;
+				}
+			});
+	}
+	else
+	{
+		console.log(`\n*NOT* notifying IDE that ${ip} is ${alive ? "online": "offline"}`);
+		status[ip].online = alive;
+	}
 };
 
 const check_status = () =>{
