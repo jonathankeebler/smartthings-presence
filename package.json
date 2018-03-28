@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/jonathankeebler/smartthings-presence#readme",
   "dependencies": {
-    "ping": "^0.2.2"
+    "ping": "^0.2.2",
+    "superagent": "^3.8.2"
   }
 }
