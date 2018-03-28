@@ -21,7 +21,7 @@ setInterval(()=>{
 
 const notify_ide = (ip, alive)=>{
 
-	console.log("Notifying IDE for " + ip);
+	console.log(`\nNotifying IDE that ${ip} is ${alive ? "online": "offline"}`);
 	request
 		.get(`${config.smartthings.ide}/api/smartapps/installations/${config.smartthings.app_id}/statechanged/${alive ? "online": "offline"}`)
 		.query({
@@ -44,7 +44,8 @@ const check_status = () =>{
 
 		if(new Date() - status[ip].last_online > config.min_time_between_online_checks)
 		{
-			console.log(`Checking ${ip}`);
+			//console.log(`Checking ${ip}`);
+			process.stdout.write("*");
 			return ping.promise.probe(ip, {
 				timeout: 1
 			});

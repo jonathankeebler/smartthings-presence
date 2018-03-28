@@ -1,7 +1,7 @@
 module.exports = {
 	"ips": ["192.168.86.229"],
 	"min_time_between_checks": 1000,
-	"min_time_between_online_checks": 5000,
+	"min_time_between_online_checks": 30000,
 	"online_threshold": 0,
 	"offline_threshold": 5000,
 	"smartthings": {
