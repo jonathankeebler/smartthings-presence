@@ -32,6 +32,8 @@ const notify_ide = (ip, alive)=>{
 			})
 			.end((err, res)=>{
 
+				if(err) console.error(err);
+				
 				if(res && res.status == 200)
 				{
 					status[ip].online = alive;
